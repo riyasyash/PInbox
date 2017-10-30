@@ -129,9 +129,16 @@ public class MainActivity extends AppCompatActivity {
         } while (smsInboxCursor.moveToNext());
     }
 
+    public void updateSMSList(String tag,ArrayAdapter adapter,String message_body) {
+        if (message_body.contains(tag)) {
+            adapter.insert(message_body,0);
+            adapter.notifyDataSetChanged();
+        }
+    }
     public void updateInbox(final String smsMessage) {
-//        arrayAdapter.insert(smsMessage, 0);
-//        arrayAdapter.notifyDataSetChanged();
+        updateSMSList("PNR",travelArrayAdapter,smsMessage);
+        updateSMSList("BANK",bankArrayAdapter,smsMessage);
+        updateSMSList("SHOW",bmsArrayAdapter,smsMessage);
     }
 
 }
